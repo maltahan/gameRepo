@@ -8,7 +8,7 @@ public class BombScript : MonoBehaviour
 
     public GameObject bomb;
     public float power = 600f;
-    public float radius = 5f;
+    public float radius = 50f;
     public float upForce = 1f;
 
     // Use this for initialization

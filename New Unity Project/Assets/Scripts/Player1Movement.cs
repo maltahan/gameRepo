@@ -8,10 +8,14 @@ public class Player1Movement : MonoBehaviour
     public float moveSpeed;
     public Vector3 input;
     Rigidbody rigidbody;
+    public GameObject bombPrefab;
+    private Transform myTransform;
     // Use this for initialization
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        myTransform = transform;
+       
     }
 
     // Update is called once per frame
@@ -23,6 +27,10 @@ public class Player1Movement : MonoBehaviour
         {
             rigidbody.AddForce(input * moveSpeed);
         }
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            DropBomb();
+        }
+        myTransform = transform;
     }
     void OnCollisionEnter(Collision c)
     {
@@ -60,6 +68,19 @@ public class Player1Movement : MonoBehaviour
             Destroy(gameObject);
         }
 
+
+    
+
+    }
+    private void DropBomb()
+    {
+        if (bombPrefab)
+        { //Check if bomb prefab is assigned first
+          // Create new bomb and snap it to a tile
+            Instantiate (bombPrefab,
+                new Vector3(myTransform.position.x, myTransform.position.y,myTransform.position.z),
+                bombPrefab.transform.rotation);
+        }
     }
 }
 
